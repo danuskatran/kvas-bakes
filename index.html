@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KVAS · Coming soon</title>
+<meta name="description" content="KVAS, sourdough micro café & fermentation community in Berlin. Coming soon.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/kvas-jar.png">
+<style>
+  :root { --ink: #171717; --grey: #6E6E6A; --crimson: #C51F3A; --ochre: #E4B83D; --teal: #176F68; color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: #fff; color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+    display: grid; place-items: center; padding: 24px 16px; text-align: center;
+  }
+  main { display: grid; justify-items: center; gap: 18px; max-width: 520px; }
+  .jar-wrap { position: relative; width: 150px; height: 190px; display: grid; place-items: center; }
+  .jar-wrap::before { content: ""; position: absolute; inset: 14px -6px 0; background: var(--ochre); border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; z-index: -1; animation: morph 16s ease-in-out infinite alternate; }
+  .jar-wrap img { height: 170px; width: auto; }
+  @keyframes morph { 50% { border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%; } 100% { border-radius: 38% 62% 58% 42% / 38% 45% 55% 62%; } }
+  h1 { margin: 6px 0 0; font-size: clamp(64px, 18vw, 120px); font-weight: 800; letter-spacing: -.06em; line-height: .85; }
+  .tag { margin: 0; font-size: 18px; line-height: 1.4; }
+  .soon { margin: 6px 0 0; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
+  .soon b { color: var(--crimson); font-weight: 400; }
+  a.ig { display: inline-block; margin-top: 6px; padding: 10px 20px; border-radius: 99px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 600; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+  a.ig:hover { transform: scale(1.06); }
+  a.ig:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  footer { margin-top: 18px; font-size: 13px; color: var(--grey); }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="jar-wrap"><img src="img/kvas-jar.png" alt="KVAS starter jar"></div>
+  <h1>KVAS</h1>
+  <p class="tag">Sauerteig-Mikrocafé &amp; Fermentations-Community · Berlin<br>Sourdough micro café &amp; fermentation community</p>
+  <p class="soon">Bald da <b>·</b> Coming soon</p>
+  <a class="ig" href="https://instagram.com/kvas_bakes" target="_blank" rel="noopener">@kvas_bakes auf Instagram ↗</a>
+  <footer>© 2026 KVAS · Berlin</footer>
+</main>
+</body>
+</html>
