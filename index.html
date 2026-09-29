@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -8,38 +8,235 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="img/kvas-jar.png">
 <style>
-  :root { --ink: #171717; --grey: #6E6E6A; --crimson: #C51F3A; --ochre: #E4B83D; --teal: #176F68; color-scheme: light; }
-  * { box-sizing: border-box; }
-  html, body { height: 100%; }
-  body {
-    margin: 0; background: #fff; color: var(--ink);
-    font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
-    display: grid; place-items: center; padding: 24px 16px; text-align: center;
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(fonts/bricolage-grotesque-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(fonts/bricolage-grotesque-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/dm-mono-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/dm-mono-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  :root {
+    --white: #FFFFFF; --ink: #171717; --grey: #6E6E6A; --line: #E7E5E0; --mist: #F3F2EE;
+    --crimson: #C51F3A; --teal: #176F68; --ochre: #E4B83D; --ochre-soft: #FBF1D6;
+    --sans: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --ease: cubic-bezier(.2,.7,.2,1); --pop: cubic-bezier(.34,1.56,.64,1);
+    --shine: radial-gradient(circle at 32% 28%, rgba(255,255,255,.7) 0 5%, rgba(255,255,255,.18) 13%, rgba(255,255,255,0) 26%);
+    --shine-pill: radial-gradient(ellipse 30% 50% at 18% 26%, rgba(255,255,255,.45), rgba(255,255,255,0) 72%);
+    --bub-shadow: inset -2px -3px 6px rgba(23,23,23,.05), inset 2px 2px 4px rgba(255,255,255,.45);
+    color-scheme: light;
   }
-  main { display: grid; justify-items: center; gap: 18px; max-width: 520px; }
-  .jar-wrap { position: relative; width: 150px; height: 190px; display: grid; place-items: center; }
-  .jar-wrap::before { content: ""; position: absolute; inset: 14px -6px 0; background: var(--ochre); border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; z-index: -1; animation: morph 16s ease-in-out infinite alternate; }
-  .jar-wrap img { height: 170px; width: auto; }
-  @keyframes morph { 50% { border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%; } 100% { border-radius: 38% 62% 58% 42% / 38% 45% 55% 62%; } }
-  h1 { margin: 6px 0 0; font-size: clamp(64px, 18vw, 120px); font-weight: 800; letter-spacing: -.06em; line-height: .85; }
-  .tag { margin: 0; font-size: 18px; line-height: 1.4; }
-  .soon { margin: 6px 0 0; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
-  .soon b { color: var(--crimson); font-weight: 400; }
-  a.ig { display: inline-block; margin-top: 6px; padding: 10px 20px; border-radius: 99px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 600; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
-  a.ig:hover { transform: scale(1.06); }
-  a.ig:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
-  footer { margin-top: 18px; font-size: 13px; color: var(--grey); }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--white); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding-inline: 24px; }
+  @media (max-width: 600px) { .wrap { padding-inline: 16px; } }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  .mono { font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; }
+
+  /* top bar */
+  .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 22px; letter-spacing: -.05em; text-decoration: none; }
+  .brand img { height: 30px; width: auto; transition: transform .4s var(--pop); }
+  .brand:hover img { transform: rotate(-8deg); }
+  .lang { display: inline-flex; background: var(--mist); border-radius: 99px; padding: 3px; }
+  .lang button { appearance: none; border: 0; background: none; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; padding: 5px 10px; border-radius: 99px; cursor: pointer; color: var(--grey); transition: background .2s, color .2s; }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+  /* hero */
+  main { padding-block: 48px 72px; }
+  .hero { position: relative; isolation: isolate; }
+  .hero h1 { margin: 0; font-size: clamp(130px, 33vw, 420px); font-weight: 800; letter-spacing: -.075em; line-height: .78; margin-left: -.04em; }
+  .blob { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; animation: morph 16s ease-in-out infinite alternate; }
+  .blob.b2 { border-radius: 58% 42% 38% 62% / 55% 38% 62% 45%; animation-duration: 19s; }
+  @keyframes morph { 33% { border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%; } 66% { border-radius: 38% 62% 58% 42% / 38% 45% 55% 62%; } 100% { border-radius: 50% 50% 34% 66% / 56% 40% 60% 44%; } }
+  .blob-hero { position: absolute; z-index: -1; width: clamp(160px, 30vw, 380px); aspect-ratio: 1; background: var(--ochre); right: 4%; top: -10px; }
+  .blob-hero2 { position: absolute; z-index: -1; width: clamp(70px, 11vw, 140px); aspect-ratio: 1; background: var(--teal); right: 32%; top: 58%; }
+  .fizz { position: absolute; inset: -20px 0 0 0; z-index: -1; pointer-events: none; }
+  .fizz span { position: absolute; border-radius: 50%; border: 1px solid rgba(23,23,23,.05); background: radial-gradient(circle at 30% 27%, #fff 0 8%, rgba(255,255,255,.25) 24%, rgba(23,111,104,.07) 65%, rgba(228,184,61,.22) 100%); box-shadow: inset -2px -4px 8px rgba(23,23,23,.05); animation: rise var(--d, 9s) ease-in-out var(--delay, 0s) infinite; }
+  @keyframes rise { 0% { transform: translate(0,0); opacity: 1; } 30% { transform: translate(10px,-40px); } 60% { transform: translate(-8px,-90px); } 90% { opacity: 1; } 100% { transform: translate(6px,-150px) scale(1.08); opacity: 0; } }
+
+  .intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; margin-top: 40px; align-items: start; }
+  .lede { font-size: clamp(24px, 3.1vw, 38px); line-height: 1.08; letter-spacing: -.03em; font-weight: 500; margin: 12px 0 0; }
+  .lede em { font-style: normal; color: var(--crimson); }
+  .soon { border-radius: 28px; padding: 28px 28px 30px; background: var(--ochre-soft); display: grid; gap: 14px; justify-items: start; }
+  .soon-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #fff; border-radius: 99px; padding: 5px 12px; }
+  .soon-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--ochre); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(.6); opacity: .6; } }
+  .soon h2 { margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -.045em; line-height: .98; }
+  .soon p { margin: 0; font-size: 17px; color: #3F3E3A; max-width: 30em; }
+  .pill { display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px; border-radius: 99px; padding: 10px 20px; background: var(--shine-pill), var(--crimson); color: #fff; transition: transform .4s var(--pop), background .2s; }
+  .pill:hover { transform: scale(1.06); background: var(--shine-pill), var(--ink); }
+
+  /* meaning */
+  .meaning { margin-top: 88px; }
+  .meanings { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 28px; }
+  .meanings ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .meanings li { display: inline-flex; align-items: center; gap: 7px; font-size: 14.5px; font-weight: 500; padding: 5px 13px 5px 6px; border-radius: 99px; border: 1px solid rgba(23,23,23,.06); background: var(--shine-pill), var(--mist); box-shadow: var(--bub-shadow); transition: transform .4s var(--pop); }
+  .meanings li:hover { transform: translateY(-3px) scale(1.05); }
+  .dotc { width: 16px; height: 16px; border-radius: 50%; flex: none; background-image: var(--shine); box-shadow: var(--bub-shadow); }
+  .story { font-size: clamp(34px, 5.4vw, 72px); font-weight: 700; letter-spacing: -.05em; line-height: 1; max-width: 17em; margin: 0; text-wrap: balance; }
+  .story em { font-style: normal; color: var(--crimson); }
+  .photo { margin: 48px 0 0; border-radius: 28px; overflow: hidden; aspect-ratio: 3 / 2; max-height: 640px; background: var(--mist); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* impressum */
+  .legal h1 { font-size: clamp(52px, 10.5vw, 136px); font-weight: 800; letter-spacing: -.06em; line-height: .85; margin: 0 0 18px; }
+  .legal .note { font-size: 17px; max-width: 36em; margin: 0 0 36px; }
+  .ph { display: inline-block; background: var(--ochre); border-radius: 99px; padding: 2px 9px; font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; margin-right: 6px; vertical-align: 2px; }
+  .legal-list { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 18px 32px; max-width: 900px; margin: 0; }
+  .legal-list dt { font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--teal); padding-top: 4px; }
+  .legal-list dd { margin: 0; font-size: 17px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .back { display: inline-block; margin-top: 36px; font-weight: 600; text-decoration: none; color: var(--crimson); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 22px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap; }
+  footer nav { display: flex; gap: 18px; font-size: 14px; }
+  footer nav a { color: var(--grey); text-decoration: none; }
+  footer nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  .muted { color: var(--grey); }
+
+  @media (max-width: 900px) { .intro { grid-template-columns: 1fr; gap: 32px; } }
+  @media (max-width: 600px) {
+    main { padding-block: 32px 56px; }
+    .photo { border-radius: 20px; margin-top: 32px; }
+    .legal-list { grid-template-columns: 1fr; gap: 4px; } .legal-list dd { margin-bottom: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
-<main>
-  <div class="jar-wrap"><img src="img/kvas-jar.png" alt="KVAS starter jar"></div>
-  <h1>KVAS</h1>
-  <p class="tag">Sauerteig-Mikrocafé &amp; Fermentations-Community · Berlin<br>Sourdough micro café &amp; fermentation community</p>
-  <p class="soon">Bald da <b>·</b> Coming soon</p>
-  <a class="ig" href="https://instagram.com/kvas_bakes" target="_blank" rel="noopener">@kvas_bakes auf Instagram ↗</a>
-  <footer>© 2026 KVAS · Berlin</footer>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#" data-view="home" aria-label="KVAS"><img src="img/kvas-jar.png" alt="">KVAS</a>
+    <div class="lang" role="group" data-i18n-aria="language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="de">DE</button></div>
+  </div>
+</header>
+
+<main class="wrap" id="home">
+  <div class="hero">
+    <div class="blob blob-hero" aria-hidden="true"></div>
+    <div class="blob b2 blob-hero2" aria-hidden="true"></div>
+    <div class="fizz" aria-hidden="true" id="fizz"></div>
+    <h1>KVAS</h1>
+  </div>
+  <div class="intro">
+    <div>
+      <p class="mono" style="color:var(--teal);margin:0" data-i18n="tagline"></p>
+      <p class="lede" data-i18n-html="lede"></p>
+    </div>
+    <div class="soon">
+      <span class="soon-badge mono"><i></i><span data-i18n="soon"></span></span>
+      <h2 data-i18n="soonTitle"></h2>
+      <p data-i18n="soonText"></p>
+      <a class="pill" href="https://instagram.com/kvas_bakes" target="_blank" rel="noopener" data-i18n="ig"></a>
+    </div>
+  </div>
+  <section class="meaning">
+    <div class="meanings">
+      <span class="mono muted" data-i18n="kvasIs"></span>
+      <ul>
+        <li><i class="dotc" style="background-color:var(--teal)"></i><span data-i18n="m1"></span></li>
+        <li><i class="dotc" style="background-color:var(--ochre)"></i><span data-i18n="m2"></span></li>
+        <li><i class="dotc" style="background-color:var(--crimson)"></i><span data-i18n="m3"></span></li>
+        <li><i class="dotc" style="background-color:var(--ink)"></i><span data-i18n="m4"></span></li>
+      </ul>
+    </div>
+    <p class="story" data-i18n-html="story"></p>
+    <figure class="photo"><img src="img/kolace_bagels.jpg" data-i18n-alt="photoAlt" alt="" loading="lazy"></figure>
+  </section>
 </main>
+
+<main class="wrap legal" id="impressum" hidden>
+  <h1 data-i18n="impressum"></h1>
+  <p class="note"><span class="ph" data-i18n="placeholder"></span><span data-i18n="impNote"></span></p>
+  <dl class="legal-list">
+    <dt data-i18n="impInfo"></dt><dd data-i18n-html="impName"></dd>
+    <dt data-i18n="impContact"></dt><dd data-i18n-html="impContactVal"></dd>
+    <dt data-i18n="impVat"></dt><dd data-i18n="impVatVal"></dd>
+    <dt data-i18n="impResp"></dt><dd data-i18n="impRespVal"></dd>
+    <dt data-i18n="impDispute"></dt><dd data-i18n="impDisputeVal"></dd>
+  </dl>
+  <a class="back" href="#" data-view="home" data-i18n="back"></a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono muted">© 2026 KVAS · Berlin · <a href="https://instagram.com/kvas_bakes" target="_blank" rel="noopener">@kvas_bakes</a></span>
+    <nav data-i18n-aria="footer"><a href="#impressum" data-view="impressum" data-i18n="impressum"></a></nav>
+  </div>
+</footer>
+
+<script>
+const TEXT = {
+  en: {
+    language: 'Language', footer: 'Footer',
+    tagline: 'Sourdough micro café & fermentation community',
+    lede: 'Based in <em>Berlin</em>, selling at pop-ups or through pre-orders for individual and business partners. Bio ingredients, sourced from local producers. Fermented for 28–32 hours, our baked goods are paired with seasonal harvest and original flavors.',
+    soon: 'Coming soon', soonTitle: 'Our website is still rising.', soonText: "Until it's out of the oven, find our bakes, pop-up dates and pre-orders on Instagram.", ig: 'Follow @kvas_bakes ↗',
+    kvasIs: 'Kvas, a Slavic word for', m1: 'a fermentation starter', m2: 'a refreshing, mildly alcoholic drink', m3: 'growth and activity', m4: 'a feast',
+    story: 'With those meanings in mind, we created <em>KVAS</em>. Our work revolves around strengthening the fermentation community through co-creations, festive gatherings and other ways of spreading the love for sourdough baking.',
+    photoAlt: 'Plum and poppy seed koláče next to sesame bagels',
+    impressum: 'Legal notice', placeholder: 'Placeholder', impNote: 'Replace everything in brackets with your real details.',
+    impInfo: 'Information according to § 5 DDG', impName: '[Your full name]<br>KVAS · sourdough micro café &amp; fermentation community<br>[Street and number]<br>[Postcode] Berlin',
+    impContact: 'Contact', impContactVal: 'Email: [your email address]<br>Instagram: @kvas_bakes', impVat: 'VAT ID', impVatVal: '[VAT identification number according to § 27a UStG, if you have one]',
+    impResp: 'Responsible for the content according to § 18 (2) MStV', impRespVal: '[Your full name and address]',
+    impDispute: 'Consumer dispute resolution', impDisputeVal: 'We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.',
+    back: '← Back to KVAS',
+  },
+  de: {
+    language: 'Sprache', footer: 'Fußzeile',
+    tagline: 'Sauerteig-Mikrocafé & Fermentations-Community',
+    lede: 'In <em>Berlin</em> zu Hause. Wir verkaufen auf Pop-ups oder per Vorbestellung an Privat- und Geschäftskund:innen. Bio-Zutaten von lokalen Erzeuger:innen, 28–32 Stunden fermentiert und kombiniert mit saisonaler Ernte und eigenen Aromen.',
+    soon: 'Bald da', soonTitle: 'Unsere Website geht noch auf.', soonText: 'Bis sie aus dem Ofen kommt, findest du unsere Backwaren, Pop-up-Termine und Vorbestellungen auf Instagram.', ig: '@kvas_bakes folgen ↗',
+    kvasIs: 'Kvas, ein slawisches Wort für', m1: 'ein Fermentationsstarter', m2: 'ein erfrischendes, leicht alkoholisches Getränk', m3: 'Wachstum und Lebendigkeit', m4: 'ein Festmahl',
+    story: 'Mit diesen Bedeutungen im Kopf haben wir <em>KVAS</em> gegründet. Unsere Arbeit dreht sich darum, die Fermentations-Community zu stärken: durch gemeinsame Kreationen, festliche Zusammenkünfte und andere Wege, die Liebe zum Sauerteigbacken zu teilen.',
+    photoAlt: 'Koláče mit Pflaume und Mohn neben Sesam-Bagels',
+    impressum: 'Impressum', placeholder: 'Platzhalter', impNote: 'Ersetze alles in Klammern durch deine echten Angaben.',
+    impInfo: 'Angaben gemäß § 5 DDG', impName: '[Dein vollständiger Name]<br>KVAS · Sauerteig-Mikrocafé &amp; Fermentations-Community<br>[Straße und Hausnummer]<br>[PLZ] Berlin',
+    impContact: 'Kontakt', impContactVal: 'E-Mail: [deine E-Mail-Adresse]<br>Instagram: @kvas_bakes', impVat: 'Umsatzsteuer-ID', impVatVal: '[Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG, falls vorhanden]',
+    impResp: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV', impRespVal: '[Dein vollständiger Name und Anschrift]',
+    impDispute: 'Verbraucherstreitbeilegung', impDisputeVal: 'Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
+    back: '← Zurück zu KVAS',
+  },
+};
+let lang = (() => {
+  try { const s = localStorage.getItem('kvas_lang'); if (s === 'en' || s === 'de') return s; } catch (e) {}
+  return (navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en';
+})();
+function applyLang(next) {
+  if (next) { lang = next; try { localStorage.setItem('kvas_lang', lang); } catch (e) {} }
+  const T = TEXT[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = T[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = T[el.dataset.i18nHtml]; });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = T[el.dataset.i18nAlt]; });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', T[el.dataset.i18nAria]); });
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.title = 'KVAS · ' + T.soon;
+}
+document.querySelector('.lang').addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) applyLang(b.dataset.lang); });
+
+function showView() {
+  const imp = location.hash === '#impressum';
+  document.getElementById('home').hidden = imp;
+  document.getElementById('impressum').hidden = !imp;
+  window.scrollTo(0, 0);
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-view]'); if (!a) return;
+  e.preventDefault();
+  history.pushState(null, '', a.dataset.view === 'impressum' ? '#impressum' : location.pathname);
+  showView();
+});
+window.addEventListener('popstate', showView);
+window.addEventListener('hashchange', showView);
+
+document.getElementById('fizz').innerHTML = [[8,70,18,8,0],[14,40,10,11,2],[22,82,26,10,4],[35,58,12,7,1],[48,76,22,12,3],[57,30,9,9,5],[66,64,16,8,.5],[74,86,30,13,2.5],[83,46,11,10,6],[91,72,20,9,1.5],[4,30,12,12,3.5],[29,20,8,8,7]]
+  .map(([x, y, sz, d, delay]) => `<span style="left:${x}%;top:${y}%;width:${sz}px;height:${sz}px;--d:${d}s;--delay:-${delay}s"></span>`).join('');
+
+applyLang();
+showView();
+</script>
 </body>
 </html>
