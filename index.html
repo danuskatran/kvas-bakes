@@ -30,7 +30,8 @@
     --shine: radial-gradient(circle at 32% 28%, rgba(255,255,255,.7) 0 5%, rgba(255,255,255,.18) 13%, rgba(255,255,255,0) 26%);
     --shine-pill: radial-gradient(ellipse 30% 50% at 18% 26%, rgba(255,255,255,.45), rgba(255,255,255,0) 72%);
     --bub-shadow: inset -2px -3px 6px rgba(23,23,23,.05), inset 2px 2px 4px rgba(255,255,255,.45);
-    --space: clamp(56px, 8vw, 104px);   /* the same gap between every section */
+    --space: clamp(56px, 8vw, 104px);
+    --text-lg: clamp(26px, 3.6vw, 46px);   /* shared size: intro, coming-soon text, story */   /* the same gap between every section */
     color-scheme: light;
   }
   * { box-sizing: border-box; }
@@ -67,15 +68,15 @@
   @keyframes rise { 0% { transform: translate(0,0); opacity: 1; } 30% { transform: translate(10px,-40px); } 60% { transform: translate(-8px,-90px); } 90% { opacity: 1; } 100% { transform: translate(6px,-150px) scale(1.08); opacity: 0; } }
 
   .intro { display: grid; gap: var(--space); margin-top: calc(var(--space) * .6); }
-  .lede { font-size: clamp(19px, 1.9vw, 24px); line-height: 1.45; font-weight: 400; margin: 12px 0 0; }
+  .lede { font-size: var(--text-lg); line-height: 1.2; font-weight: 400; margin: 12px 0 0; }
   .lede em { font-style: normal; color: var(--crimson); }
-  .soon { border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); background: var(--ochre-soft); display: grid; grid-template-columns: 1fr 1fr; gap: 20px 48px; align-items: end; }
-  .soon-head, .soon-body { display: grid; gap: 16px; justify-items: start; }
+  .soon { border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); background: var(--ochre-soft); display: grid; gap: 20px; }
+  .soon-head, .soon-body { display: grid; gap: 20px; justify-items: start; }
   .soon-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #fff; border-radius: 99px; padding: 5px 12px; }
   .soon-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--ochre); animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 50% { transform: scale(.6); opacity: .6; } }
   .soon h2 { margin: 0; font-family: var(--display); font-variation-settings: var(--soft); font-size: clamp(30px, 3.6vw, 44px); font-weight: 700; letter-spacing: -.02em; line-height: 1; }
-  .soon p { margin: 0; font-size: 18.5px; line-height: 1.45; color: #3F3E3A; }
+  .soon p { margin: 0; font-size: var(--text-lg); line-height: 1.2; color: #3F3E3A; }
   .pill { display: inline-block; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 16px; border-radius: 99px; padding: 10px 20px; background: var(--shine-pill), var(--crimson); color: #fff; transition: transform .4s var(--pop), background .2s; }
   .pill:hover { transform: scale(1.06); background: var(--shine-pill), var(--ink); }
 
@@ -86,7 +87,7 @@
   .meanings li { display: inline-flex; align-items: center; gap: 7px; font-size: 16px; font-weight: 500; padding: 5px 13px 5px 6px; border-radius: 99px; border: 1px solid rgba(23,23,23,.06); background: var(--shine-pill), var(--mist); box-shadow: var(--bub-shadow); transition: transform .4s var(--pop); }
   .meanings li:hover { transform: translateY(-3px) scale(1.05); }
   .dotc { width: 16px; height: 16px; border-radius: 50%; flex: none; background-image: var(--shine); box-shadow: var(--bub-shadow); }
-  .story { font-size: clamp(26px, 3.6vw, 46px); font-weight: 500; letter-spacing: -.01em; line-height: 1.2; margin: 0; text-wrap: pretty; }
+  .story { font-size: var(--text-lg); font-weight: 500; letter-spacing: -.01em; line-height: 1.2; margin: 0; text-wrap: pretty; }
   .story em { font-style: normal; color: var(--crimson); }
   .lede, .soon p, .story, .legal .note, .legal-list dd { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .bakes-title { margin: var(--space) 0 0; padding-top: calc(var(--space) * .4); border-top: 1px solid var(--line); font-family: var(--display); font-variation-settings: var(--soft); font-size: clamp(44px, 7vw, 92px); font-weight: 800; letter-spacing: -.03em; line-height: .95; }
