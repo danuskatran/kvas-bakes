@@ -30,6 +30,7 @@
     --shine: radial-gradient(circle at 32% 28%, rgba(255,255,255,.7) 0 5%, rgba(255,255,255,.18) 13%, rgba(255,255,255,0) 26%);
     --shine-pill: radial-gradient(ellipse 30% 50% at 18% 26%, rgba(255,255,255,.45), rgba(255,255,255,0) 72%);
     --bub-shadow: inset -2px -3px 6px rgba(23,23,23,.05), inset 2px 2px 4px rgba(255,255,255,.45);
+    --space: clamp(56px, 8vw, 104px);   /* the same gap between every section */
     color-scheme: light;
   }
   * { box-sizing: border-box; }
@@ -53,7 +54,7 @@
   .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 
   /* hero */
-  main { padding-block: 48px 72px; }
+  main { padding-block: 48px var(--space); }
   .hero { position: relative; isolation: isolate; }
   .hero h1 { margin: 0; font-family: var(--wordmark); font-size: clamp(130px, 33vw, 420px); font-weight: 800; letter-spacing: -.075em; line-height: .78; margin-left: -.04em; }
   .blob { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; animation: morph 16s ease-in-out infinite alternate; }
@@ -65,20 +66,21 @@
   .fizz span { position: absolute; border-radius: 50%; border: 1px solid rgba(23,23,23,.05); background: radial-gradient(circle at 30% 27%, #fff 0 8%, rgba(255,255,255,.25) 24%, rgba(23,111,104,.07) 65%, rgba(228,184,61,.22) 100%); box-shadow: inset -2px -4px 8px rgba(23,23,23,.05); animation: rise var(--d, 9s) ease-in-out var(--delay, 0s) infinite; }
   @keyframes rise { 0% { transform: translate(0,0); opacity: 1; } 30% { transform: translate(10px,-40px); } 60% { transform: translate(-8px,-90px); } 90% { opacity: 1; } 100% { transform: translate(6px,-150px) scale(1.08); opacity: 0; } }
 
-  .intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; margin-top: 40px; align-items: start; }
-  .lede { font-size: clamp(21px, 2.3vw, 28px); line-height: 1.35; font-weight: 400; margin: 12px 0 0; }
+  .intro { display: grid; gap: var(--space); margin-top: calc(var(--space) * .6); }
+  .lede { font-size: clamp(19px, 1.9vw, 24px); line-height: 1.45; font-weight: 400; margin: 12px 0 0; }
   .lede em { font-style: normal; color: var(--crimson); }
-  .soon { border-radius: 28px; padding: 28px 28px 30px; background: var(--ochre-soft); display: grid; gap: 14px; justify-items: start; }
+  .soon { border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); background: var(--ochre-soft); display: grid; grid-template-columns: 1fr 1fr; gap: 20px 48px; align-items: end; }
+  .soon-head, .soon-body { display: grid; gap: 16px; justify-items: start; }
   .soon-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #fff; border-radius: 99px; padding: 5px 12px; }
   .soon-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--ochre); animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 50% { transform: scale(.6); opacity: .6; } }
   .soon h2 { margin: 0; font-family: var(--display); font-variation-settings: var(--soft); font-size: clamp(30px, 3.6vw, 44px); font-weight: 700; letter-spacing: -.02em; line-height: 1; }
-  .soon p { margin: 0; font-size: 18.5px; line-height: 1.45; color: #3F3E3A; max-width: 30em; }
+  .soon p { margin: 0; font-size: 18.5px; line-height: 1.45; color: #3F3E3A; }
   .pill { display: inline-block; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 16px; border-radius: 99px; padding: 10px 20px; background: var(--shine-pill), var(--crimson); color: #fff; transition: transform .4s var(--pop), background .2s; }
   .pill:hover { transform: scale(1.06); background: var(--shine-pill), var(--ink); }
 
   /* meaning */
-  .meaning { margin-top: 88px; }
+  .meaning { margin-top: var(--space); }
   .meanings { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 28px; }
   .meanings ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .meanings li { display: inline-flex; align-items: center; gap: 7px; font-size: 16px; font-weight: 500; padding: 5px 13px 5px 6px; border-radius: 99px; border: 1px solid rgba(23,23,23,.06); background: var(--shine-pill), var(--mist); box-shadow: var(--bub-shadow); transition: transform .4s var(--pop); }
@@ -87,8 +89,8 @@
   .story { font-size: clamp(26px, 3.6vw, 46px); font-weight: 500; letter-spacing: -.01em; line-height: 1.2; margin: 0; text-wrap: pretty; }
   .story em { font-style: normal; color: var(--crimson); }
   .lede, .soon p, .story, .legal .note, .legal-list dd { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
-  .bakes-title { margin: 120px 0 0; padding-top: 28px; border-top: 1px solid var(--line); font-family: var(--display); font-variation-settings: var(--soft); font-size: clamp(44px, 7vw, 92px); font-weight: 800; letter-spacing: -.03em; line-height: .95; }
-  .photo { margin: 28px auto 0; border-radius: 28px; overflow: hidden; aspect-ratio: 3 / 2; max-height: 640px; background: var(--mist); }
+  .bakes-title { margin: var(--space) 0 0; padding-top: calc(var(--space) * .4); border-top: 1px solid var(--line); font-family: var(--display); font-variation-settings: var(--soft); font-size: clamp(44px, 7vw, 92px); font-weight: 800; letter-spacing: -.03em; line-height: .95; }
+  .photo { margin: 32px auto 0; border-radius: 28px; overflow: hidden; aspect-ratio: 3 / 2; max-height: 640px; background: var(--mist); }
   .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* impressum */
@@ -107,11 +109,10 @@
   footer nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
   .muted { color: var(--grey); }
 
-  @media (max-width: 900px) { .intro { grid-template-columns: 1fr; gap: 32px; } }
+  @media (max-width: 900px) { .soon { grid-template-columns: 1fr; } }
   @media (max-width: 600px) {
-    main { padding-block: 32px 56px; }
-    .photo { border-radius: 20px; margin-top: 20px; }
-    .bakes-title { margin-top: 72px; }
+    main { padding-top: 32px; }
+    .photo { border-radius: 20px; margin-top: 24px; }
     .legal-list { grid-template-columns: 1fr; gap: 4px; } .legal-list dd { margin-bottom: 14px; }
   }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -138,10 +139,14 @@
       <p class="lede" data-i18n-html="lede"></p>
     </div>
     <div class="soon">
-      <span class="soon-badge mono"><i></i><span data-i18n="soon"></span></span>
-      <h2 data-i18n="soonTitle"></h2>
-      <p data-i18n="soonText"></p>
-      <a class="pill" href="https://instagram.com/kvas_bakes" target="_blank" rel="noopener" data-i18n="ig"></a>
+      <div class="soon-head">
+        <span class="soon-badge mono"><i></i><span data-i18n="soon"></span></span>
+        <h2 data-i18n="soonTitle"></h2>
+      </div>
+      <div class="soon-body">
+        <p data-i18n="soonText"></p>
+        <a class="pill" href="https://instagram.com/kvas_bakes" target="_blank" rel="noopener" data-i18n="ig"></a>
+      </div>
     </div>
   </div>
   <section class="meaning">
