@@ -111,6 +111,11 @@
   .muted { color: var(--grey); }
 
   @media (max-width: 900px) { .soon { grid-template-columns: 1fr; } }
+  /* phones & tablets: size the blobs from the KVAS lettering so they never reach the text below */
+  @media (max-width: 900px) {
+    .blob-hero { width: auto; height: calc(100% + 10px); top: -10px; }
+    .blob-hero2 { width: auto; height: 45%; top: 50%; }
+  }
   @media (max-width: 600px) {
     main { padding-top: 32px; }
     .photo { border-radius: 20px; margin-top: 24px; }
